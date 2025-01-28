@@ -4,67 +4,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tip Calcualtor</title>
+  <title>Tip Calculator</title>
   <link rel="shortcut icon" href="https://img.freepik.com/free-vector/woman-explaining-girl-how-use-calculator-flyer-template_74855-14758.jpg?ga=GA1.1.1211554208.1733224352&semt=ais_hybrid" type="image/x-icon">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <style>
+    body{
+      background: url(https://img.freepik.com/free-photo/i-take-tip-glass-filled-with-money-plant-background_23-2148305918.jpg?ga=GA1.1.1211554208.1733224352&semt=ais_hybrid);
+     
+    }
+  </style>
 </head>
 
 <body>
-  <h2 class="text-primary text-center mt-5 mb-5">Tip Calculator</h2>
-  <div class="container ">
-    <div class="row ">
+  <h2 class="text-white text-center mt-5 mb-5 border border-4 border-success bg-success tex-"><i>Tip Calculator</i></h2>
+  <div class="container">
+    <div class="row">
       <div class="col-md-4"></div>
-      <div class="col-md-4 ">
-        <form class="border border-3 border-primary p-5 mt-5">
+      <div class="col-md-4">
+        <form class="border border-3 border-primary p-5 mt-5 rounded-5 bg-secondary text-white bg-opacity-75">
           <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Enter Amount</label>
-            <input type="number" class="form-control" id="enterAmount" aria-describedby="emailHelp">
+            <label for="enterAmount" class="form-label">Enter Amount</label>
+            <input type="number" class="form-control" id="enterAmount" aria-describedby="amountHelp">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Enter % of tip</label>
-            <input type="number" class="form-control" id="enterTip">
+            <label for="tipPercentage" class="form-label">Enter % of tip</label>
+            <select class="form-select" id="tipPercentage" aria-label="Default select example">
+              <option value="10">10%</option> 
+              <option value="25">25%</option> 
+              <option value="30">30%</option>
+              <option value="40">40%</option>
+            </select>
           </div>
 
-          <button type="button" class="btn btn-primary" onclick="tipcalc()">Submit</button>
-          <button type="button" class="btn btn-danger" onclick="reset()">Reset</button>
+          <button type="button" class="btn btn-primary" onclick="calculateTip()">Submit</button>
+          <button type="button" class="btn btn-danger ms-3" onclick="resetFields()">Reset</button>
         </form>
-
+              
         <div>
-          <h3 id="tip" class="mt-3 text-center"></h3>
-          <h3 id="total" class="mt-3 text-center"></h3>
+          <h3  class="mt-3 text-center border border-3 border-primary bg-primary text-white rounded-5 p-2 bg-opacity-75 ">The Tip Amount is:&#8377<span id="tip"></span></h3>
+          <h3  class="mt-3 text-center border border-3 border-primary bg-primary text-white rounded-5 p-2 bg-opacity-75">The Total Amount is:&#8377<span id="total"></span></h3>
         </div>
-
       </div>
-
       <div class="col-md-4"></div>
     </div>
   </div>
 
   <script>
-          
-      function tipcalc(){
-      var a=parseFloat(document.getElementById('enterAmount').value);
-      var b=parseFloat(document.getElementById('enterTip').value);
-      if( !isNaN(a) && !isNaN(b)){
-      let tipAmount=(a*b)/100;
-      let total=tipAmount+(+a);
-      document.getElementById('tip').innerHTML=`The Tip amount is &#8377 ${tipAmount}`;
-      document.getElementById('total').innerHTML=`The Total amount is &#8377 ${total}`
+    function calculateTip() {
+      var amount=parseFloat(document.getElementById('enterAmount').value);
+      var tipPercentage=parseFloat(document.getElementById('tipPercentage').value);
+      if (!(isNaN(amount))  && !(isNaN(tipPercentage))) {
+        let tipAmount =(amount*tipPercentage)/100;
+        let total =tipAmount+amount;
+        document.getElementById('tip').innerHTML = `${tipAmount}`;
+        document.getElementById('total').innerHTML = `${total}`;
+      } else {
+        alert('Please fill all fields');
+        document.getElementById('tip').innerHTML = '';
+        document.getElementById('total').innerHTML = '';
       }
-      else{
-      alert('Please fill all fields')
-      document.getElementById('tip').innerHTML='';
-      document.getElementById('total').innerHTML='';
-      }
-    }
-    function reset() {
-    document.getElementById('enterAmount').value = '';
-    document.getElementById('enterTip').value = '';
-    document.getElementById('tip').innerHTML = '';
-    document.getElementById('total').innerHTML = '';
     }
 
+    function resetFields() {
+     document.getElementById('enterAmount').value='';
+     document.getElementById('tipPercentage').value='';
+     document.getElementById('tip').innerHTML='';
+     document.getElementById('total').innerHTML='';
+    }
   </script>
 </body>
 
